@@ -1,0 +1,51 @@
+1
+CREATE TABLE postac 
+    -> (id_postaci int AUTO_INCREMENT, 
+    -> nazwa varchar(40), 
+    -> rodzaj ENUM('wiking','ptak','kobieta'),
+    -> data_ur DATE, 
+    -> wiek int,
+    -> PRIMARY KEY(id_postaci));
+
+INSERT INTO postac
+    -> (id_postaci, nazwa, rodzaj, data_ur, wiek)
+    -> VALUES(1, 'Bjorn', 'wiking', '1300-02-15', 45)
+;
+
+INSERT INTO postac
+    -> (id_postaci, nazwa, rodzaj, data_ur, wiek)
+    -> VALUES(2, 'Drozd', 'ptak', '1339-04-13' , 6)
+;
+
+INSERT INTO postac
+    -> (id_postaci, nazwa, rodzaj, data_ur, wiek)
+    -> VALUES(3, 'Tesciowa', 'kobieta', '1257-10-19' , 88)
+;
+
+2.
+CREATE TABLE walizka
+    -> (id_walizki int AUTO_INCREMENT, 
+    -> pojemnosc int, 
+    -> kolor ENUM('rozowy','czerwony','teczowy','zolty'), 
+    -> id_wlasciciela int, 
+    -> PRIMARY KEY(id_walizki), 
+    -> FOREIGN KEY(id_wlasciciela) REFERENCES postac(id_postaci));
+
+ALTER TABLE walizka ALTER kolor SET DEFAULT 'rozowy';
+
+INSERT INTO walizka
+    -> (id_walizki, pojemnosc, kolor, id_wlasciciela)
+    -> VALUES(1,300,'teczowy',1);
+
+INSERT INTO walizka
+    -> (id_walizki, pojemnosc, kolor, id_wlasciciela)
+    -> VALUES(2,500,'rozowy',3);
+
+3
+CREATE TABLE izba(
+    -> adres_budynku INT , 
+    -> nazwa_izby VARCHAR(30), 
+    -> metraz INT, wlasciciel int, 
+    -> PRIMARY KEY(adres_budynku, nazwa_izby), 
+    -> FOREIGN KEY(wlasciciel) REFERENCES postac(id_postaci)
+    -> );
