@@ -1,0 +1,53 @@
+
+ALTER TABLE postac MODIFY rodzaj ENUM('wiking','kobieta','ptak','syrena','waz');
+
+Select wiek, CASE WHEN wiek > 1000 THEN 'Wiek wiekszy niz 100' END FROM postac;
+
+ DELETE FROM marynarz WHERE id_postaci = 9;
+ DELETE FROM marynarz WHERE id_postaci = 10;
+
+CREATE TABLE marynarz AS SELECT * FROM postac;
+ALTER TABLE marynarz ADD PRIMARY KEY pesel
+ALTER TABLE marynarz ADD FOREIGN KEY(STATEK) REFERENCES statek(nazwa_statku);
+
+
+ALTER TABLE marynarz DROP FOREIGN KEY marynarz_ibfk_1;
+ALTER TABLE postac DROP FOREIGN KEY marynarz_ibfk_1;
+ DROP TABLE statek;
+
+UPDATE marynarz SET STATEK = NULL;
+UPDATE postac SET STATEK = NULL;
+
+CREATE TABLE zwierz(id INT AUTO_INCREMENT, nazwa varchar(30), wiek int, PRIMARY KEY(id) );
+
+INSERT INTO zwierz(nazwa, wiek) VALUES('Drozd', 6);
+INSERT INTO zwierz(nazwa, wiek) VALUES('Gertruda Nieszczera', 20);
+INSERT INTO zwierz(nazwa, wiek) VALUES('Loko', 15);
+
+CREATE TABLE wolkiewiczc.ekwipunek AS SELECT * FROM wikingowie.ekwipunek;
+CREATE TABLE wolkiewiczc.zasob AS SELECT * FROM wikingowie.zasob;
+CREATE TABLE wolkiewiczc.kreatura AS SELECT * FROM wikingowie.kreatura;
+
+SELECT * FROM zasob;
+
+SELECT * FROM zasob
+    -> WHERE rodzaj = 'jedzenie';
+
+SELECT idZasobu, ilosc FROM zasob WHERE idZasobu % 2 <> 0 ;
+
+SELECT * FROM kreatura WHERE udzwig >= 50 and rodzaj <> 'wiedzma';
+
+SELECT * FROM zasob WHERE waga BETWEEN 2 and 5;
+
+SELECT * FROM kreatura WHERE nazwa LIKE '%or%';
+SELECT * FROM kreatura WHERE udzwig BETWEEN 30 and 70;
+SELECT * FROM kreatura WHERE nazwa LIKE '%or%' and udzwig BETWEEN 30 and 70;
+
+SELECT * FROM zasob WHERE datapozyskania LIKE '%-08-%' or datapozyskania LIKE '%-07-%';
+SELECT * FROM zasob WHERE rodzaj IS NOT NULL ORDER BY waga ASC;
+SELECT * FROM kreatura ORDER BY dataur DESC LIMIT 5;
+
+SELECT * FROM zasob WHERE rodzaj IS NULL;
+
+SELECT nazwa,rodzaj FROM kreatura WHERE rodzaj LIKE 'wi%';
+
