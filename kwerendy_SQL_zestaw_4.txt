@@ -1,0 +1,56 @@
+SELECT DISTINCT rodzaj FROM zasob;        (unikalne)
+SELECT CONCAT(nazwa,'-',rodzaj) AS 'nazwa-rodzaj' FROM kreatura WHERE rodzaj LIKE 'wi%';
+SELECT ilosc*waga FROM zasob WHERE datapozyskania BETWEEN '2000-01-01' and '2007-12-31';
+
+SELECT *, ilosc*waga*0.7 AS 'WAGA netto' FROM zasob WHERE rodzaj = 'jedzenie';
+SELECT * FROM zasob WHERE rodzaj IS NULL;
+SELECT DISTINCT nazwa from zasob WHERE nazwa LIKE 'Ba%' OR nazwa LIKE '%os' ORDER BY nazwa ASC;
+
+
+
+444444444444444444444444444444444444444
+
+SELECT AVG(waga) FROM kreatura WHERE rodzaj = 'wiking';
+SELECT rodzaj,AVG(waga),COUNT(nazwa) FROM kreatura GROUP BY rodzaj;
+SELECT rodzaj,AVG(YEAR(dataUr)) FROM kreatura GROUP BY rodzaj;
+
+
+SELECT rodzaj,SUM(waga) FROM zasob GROUP BY rodzaj;
+SELECT nazwa,AVG(waga) FROM zasob WHERE ilosc >= 4 GROUP BY nazwa HAVING SUM(waga)>10;
+SELECT DISTINCT(nazwa) FROM zasob WHERE ilosc>1;
+
+
+SELECT kreatura.nazwa,ekwipunek.ilosc FROM kreatura INNER JOIN ekwipunek ON kreatura.idkreatury = ekwipunek.idkreatury;
+
+SELECT kreatura.nazwa,zasob.nazwa,ekwipunek.ilosc FROM ekwipunek 
+->INNER JOIN kreatura ON kreatura.idkreatury = ekwipunek.idkreatury
+->INNER JOIN zasob ON ekwipunek.idzasobu = zasob.idzasobu ;
+
+SELECT * FROM kreatura_bez_ekwipunku;
+
+SELECT kreatura.nazwa,zasob.nazwa FROM ekwipunek 
+->INNER JOIN zasob ON ekwipunek.idZasobu=zasob.idZasobu 
+->INNER JOIN kreatura ON ekwipunek.idkreatury=kreatura.idkreatury 
+->WHERE YEAR(kreatura.dataUr) BETWEEN 1601 AND 1700;
+
+SELECT kreatura.nazwa,zasob.nazwa FROM ekwipunek 
+->INNER JOIN zasob ON ekwipunek.idZasobu=zasob.idZasobu 
+->RIGHT JOIN kreatura ON ekwipunek.idkreatury=kreatura.idkreatury 
+->WHERE YEAR(kreatura.dataUr) BETWEEN 1670 AND 1680;
+
+SELECT kreatura.nazwa,zasob.nazwa FROM ekwipunek  
+->INNER JOIN zasob ON ekwipunek.idZasobu=zasob.idZasobu  
+->RIGHT JOIN kreatura ON ekwipunek.idkreatury=kreatura.idkreatury 
+->WHERE kreatura.rodzaj = 'wiking' 
+->AND WHERE YEAR(kreatura.dataUr) BETWEEN 1670 AND 1680;
+
+SELECT kreatura.nazwa FROM ekwipunek 
+->INNER JOIN zasob ON ekwipunek.idZasobu=zasob.idZasobu 
+->RIGHT JOIN kreatura ON ekwipunek.idkreatury=kreatura.idkreatury 
+->WHERE zasob.rodzaj = 'jedzenie';
+
+
+SELECT CONCAT(k1.nazwa,'-',k2.nazwa) AS 'Nazwy osob o id laczacych sie co 5pkt' 
+FROM kreatura k1, kreatura k2  
+WHERE k1.idkreatury = k2.idkreatury+5;
+
