@@ -48,5 +48,5 @@ WHERE k1.idkreatury = k2.idkreatury+5;
 SELECT k.rodzaj, avg(e.ilosc*z.waga), 
 sum(e.ilosc) from kreatura k, ekwipunek e, zasob z WHERE k.idKreatury=e.idKreatury AND e.idZasobu=z.idZasobu AND k.rodzaj NOT IN ('malpa','waz') group by rodzaj having sum(e.ilosc) < 30;
 
-SELECT  'najmlodsza',a.maxData, b.nazwa, a.rodzaj FROM (SELECT max(dataUr) maxData, rodzaj FROM kreatura GROUP BY  rodzaj) a, (SELECT nazwa, dataUr FROM kreatura) b WHERE a.maxData = b.dataUr union
-SELECT 'najstarsza',a.minData, b.nazwa, a.rodzaj FROM (SELECT min(dataUr) minData, rodzaj FROM kreatura GROUP BY rodzaj) a, (SELECT nazwa, dataUr FROM kreatura) b WHERE a.minData = b.dataUr;
+SELECT a.nazwa, a.rodzaj, a.dataUr FROM kreatura a, (SELECT min(dataUr) min, max(dataUr) max from kreatura GROUP BY rodzaj) b WHERE b.min = a.dataUr OR b.max=a.dataUr;
+
