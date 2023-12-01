@@ -1,29 +1,4 @@
 
-ALTER TABLE postac MODIFY rodzaj ENUM('wiking','kobieta','ptak','syrena','waz');
-
-Select wiek, CASE WHEN wiek > 1000 THEN 'Wiek wiekszy niz 100' END FROM postac;
-
- DELETE FROM marynarz WHERE id_postaci = 9;
- DELETE FROM marynarz WHERE id_postaci = 10;
-
-CREATE TABLE marynarz AS SELECT * FROM postac;
-ALTER TABLE marynarz ADD PRIMARY KEY pesel
-ALTER TABLE marynarz ADD FOREIGN KEY(STATEK) REFERENCES statek(nazwa_statku);
-
-
-ALTER TABLE marynarz DROP FOREIGN KEY marynarz_ibfk_1;
-ALTER TABLE postac DROP FOREIGN KEY marynarz_ibfk_1;
- DROP TABLE statek;
-
-UPDATE marynarz SET STATEK = NULL;
-UPDATE postac SET STATEK = NULL;
-
-CREATE TABLE zwierz(id INT AUTO_INCREMENT, nazwa varchar(30), wiek int, PRIMARY KEY(id) );
-
-INSERT INTO zwierz(nazwa, wiek) VALUES('Drozd', 6);
-INSERT INTO zwierz(nazwa, wiek) VALUES('Gertruda Nieszczera', 20);
-INSERT INTO zwierz(nazwa, wiek) VALUES('Loko', 15);
-
 CREATE TABLE wolkiewiczc.ekwipunek AS SELECT * FROM wikingowie.ekwipunek;
 CREATE TABLE wolkiewiczc.zasob AS SELECT * FROM wikingowie.zasob;
 CREATE TABLE wolkiewiczc.kreatura AS SELECT * FROM wikingowie.kreatura;
@@ -50,4 +25,13 @@ SELECT * FROM kreatura ORDER BY dataur DESC LIMIT 5;
 SELECT * FROM zasob WHERE rodzaj IS NULL;
 
 SELECT nazwa,rodzaj FROM kreatura WHERE rodzaj LIKE 'wi%';
+
+SELECT DISTINCT rodzaj FROM zasob;        (unikalne)
+SELECT CONCAT(nazwa,'-',rodzaj) AS 'nazwa-rodzaj' FROM kreatura WHERE rodzaj LIKE 'wi%';
+SELECT ilosc*waga FROM zasob WHERE datapozyskania BETWEEN '2000-01-01' and '2007-12-31';
+
+SELECT *, ilosc*waga*0.7 AS 'WAGA netto' FROM zasob WHERE rodzaj = 'jedzenie';
+SELECT * FROM zasob WHERE rodzaj IS NULL;
+SELECT DISTINCT nazwa from zasob WHERE nazwa LIKE 'Ba%' OR nazwa LIKE '%os' ORDER BY nazwa ASC;
+
 
