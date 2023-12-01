@@ -1,12 +1,3 @@
-SELECT DISTINCT rodzaj FROM zasob;        (unikalne)
-SELECT CONCAT(nazwa,'-',rodzaj) AS 'nazwa-rodzaj' FROM kreatura WHERE rodzaj LIKE 'wi%';
-SELECT ilosc*waga FROM zasob WHERE datapozyskania BETWEEN '2000-01-01' and '2007-12-31';
-
-SELECT *, ilosc*waga*0.7 AS 'WAGA netto' FROM zasob WHERE rodzaj = 'jedzenie';
-SELECT * FROM zasob WHERE rodzaj IS NULL;
-SELECT DISTINCT nazwa from zasob WHERE nazwa LIKE 'Ba%' OR nazwa LIKE '%os' ORDER BY nazwa ASC;
-
-
 
 444444444444444444444444444444444444444
 
@@ -54,3 +45,8 @@ SELECT CONCAT(k1.nazwa,'-',k2.nazwa) AS 'Nazwy osob o id laczacych sie co 5pkt'
 FROM kreatura k1, kreatura k2  
 WHERE k1.idkreatury = k2.idkreatury+5;
 
+SELECT k.rodzaj, avg(e.ilosc*z.waga), 
+sum(e.ilosc) from kreatura k, ekwipunek e, zasob z WHERE k.idKreatury=e.idKreatury AND e.idZasobu=z.idZasobu AND k.rodzaj NOT IN ('malpa','waz') group by rodzaj having sum(e.ilosc) < 30;
+
+SELECT  'najmlodsza',a.maxData, b.nazwa, a.rodzaj from (select max(dataUr) maxData, rodzaj from kreatura group by rodzaj) a, (select nazwa, dataUr from kreatura) b where a.maxData = b.dataUr
+select 'najstarsza',a.minData, b.nazwa, a.rodzaj from (select min(dataUr) minData, rodzaj from kreatura group by rodzaj) a, (select nazwa, dataUr from kreatura) b where a.minData = b.dataUr;
