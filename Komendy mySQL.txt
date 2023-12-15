@@ -1,0 +1,66 @@
+### PODSTAWOWE KOMENDY ###
+
+CREATE TABLE          - Tworzenie tabeli
+SELECT * FROM         - Wyświetlanie rekordów
+INSERT INTO__VALUES   - Wstawianie rekordów do tabeli
+AlTER TABLE           - Edytowanie struktóry tabeli
+UPDATE SET            - Edytowanie znanych już rekordów(komórek)
+DELETE FROM (warunek) - Usuwa rekordy na stałe, spełniające warunek
+DROP                  - Usuwa stróktóry typu klucze obce oraz całe tabele
+JOIN _ AS _ ON _=_    - Łączenie tabel przy wyświetlaniu przy pomocy kluczy
+
+###                    ###
+
+Klucze:
+PRIMARY KEY(_kolumna_)
+FOREIGN KEY(_t1_kolumna_) REFERENCES _tabela2_(_t2_kolumna_)
+
+      * Powiązanie kolumny z kolumną innej tabeli  *
+
+### KOMENDY DO SELECTA ###
+
+# PISANE NA POCZĄTKU
+
+CONCUT
+COUNT
+DISTINCT
+GROUP COUNT
+
+# PISANE NA KOŃCU
+
+GROUP BY(_kolumna_)      - Łączy rekordy o takich samych danych w kolumnie
+ORDER BY _CZYM_
+LIMIT _CYFRA_
+
+### KOMENDY WARUNKOWE ###
+
+CASE
+WHERE
+IF
+IFNULL
+NULLIF
+
+### KOMENDY DO TWORZENIA WARUNKÓW ###
+
+ELSE  -  OR  -  AND  - w przeciwnym razie, lub, i
+BETWEEN _ AND _      - Pomiędzy liczbami
+_ IS NOT NULL        - Komórka nie jest pusta
+_ LIKE '%LITERY%'    - Sprawdza czy dane LITERY znajdują się w danych komórkach
+NOT IN
+
+### DODATKOWE KOMENDY ###
+
+INT()
+VARCHAR()
+FLOAT()
+DATE
+SUM(_kolumna_)
+AVG(_kolumna_)
+DATEDIFF
+YEAR(_data_) 
+MONTH(_data_)
+DAY(_data_)
+MIN(_kolumna_)
+MAX(_kolumna_)
+
+
