@@ -1,0 +1,53 @@
+CREATE TABLE wolkiewiczc.wyprawa AS SELECT * FROM wikingowie.wyprawa;
+CREATE TABLE wolkiewiczc.sektor AS SELECT * FROM wikingowie.sektor;
+CREATE TABLE wolkiewiczc.etapy_wyprawy AS SELECT * FROM wikingowie.etapy_wyprawy;
+CREATE TABLE wolkiewiczc.uczestnicy AS SELECT * FROM wikingowie.uczestnicy;
+
+SELECT * FROM etapy_wyprawy; Select * From sektor; SELECT * FROM wyprawa; SELECT * FROM uczestnicy;
+
+SELECT * FROM kreatura AS k1 JOIN uczestnicy AS u1 ON k1.idkreatury=u1.id_uczestnika
+
+SELECT w1.nazwa, SUM(e1.ilosc) 
+FROM ekwipunek AS e1 
+JOIN kreatura AS k1 ON k1.idkreatury=e1.idkreatury
+JOIN uczestnicy AS u1 ON k1.idkreatury=u1.id_uczestnika
+JOIN wyprawa AS w1 ON w1.id_wyprawy=u1.id_wyprawy
+GROUP BY w1.nazwa;
+
+SELECT w1.nazwa, COUNT(u1.id_uczestnika), GROUP_CONCAT(k1.nazwa) AS 'Uczestnicy' 
+FROM kreatura AS k1
+JOIN uczestnicy AS u1 ON k1.idkreatury=u1.id_uczestnika
+JOIN wyprawa AS w1 ON w1.id_wyprawy=u1.id_wyprawy GROUP BY w1.nazwa;
+
+SELECT DISTINCT(e1.idetapu) AS 'Id etapu', w1.nazwa AS 'nazwa wyprawy', s1.nazwa AS 'Nazwa miejsca', k1.nazwa AS 'Kierownik wyprawy'
+FROM wyprawa AS w1
+JOIN uczestnicy AS u1 ON w1.id_wyprawy=u1.id_wyprawy
+JOIN kreatura AS k1 ON k1.idkreatury=w1.kierownik
+JOIN etapy_wyprawy AS e1 ON e1.idwyprawy=w1.id_wyprawy
+JOIN sektor AS s1 ON s1.id_sektora=e1.sektor 
+ORDER BY(k1.nazwa), e1.idetapu;
+  .
+ /|\    Zadanie 1 oraz 2 
+  | 
+
+  |
+ \|/    Pozostałe zadanie nie wykonane do końca.
+  '
+
+SELECT s1.nazwa, COUNT(*, e1.sektor) AS ('Ile razy?') FROM wyprawa AS w1
+JOIN uczestnicy AS u1 ON w1.id_wyprawy=u1.id_wyprawy
+JOIN kreatura AS k1 ON k1.idkreatury=w1.kierownik
+JOIN etapy_wyprawy AS e1 ON e1.idwyprawy=w1.id_wyprawy
+JOIN sektor AS s1 ON s1.id_sektora=e1.sektor 
+GROUP BY(s1.nazwa)
+
+
+SELECT COUNT(e1.sektor),s1.nazwa FROM etapy_wyprawy AS e1 
+JOIN sektor AS s1 ON s1.id_sektora=e1.sektor 
+GROUP BY s1.nazwa CASE WHEN COUNT(e1.sektor) is NULL THEN COUNT(e1.sektor)=('NIE');
+
+
+SELECT k1.nazwa,
+CASE WHEN id_uczestnika IS NOT NULL THEN 'bral udzial' ELSE 'nie bral udzialu' END AS (Czy bral udzial) 
+FROM kreatura AS k1
+JOIN uczestnicy AS u1 ON k1.idkreatury=u1.id_uczestnika;
