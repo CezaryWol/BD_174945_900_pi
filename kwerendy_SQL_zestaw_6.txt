@@ -1,0 +1,45 @@
+CREATE TRIGGER
+AFTER INSERT ON pracownik
+FOR EACH ROW
+BEGIN
+	IF NEW.wiek < 18 THEN
+		SIGNAL SQLSTATE '45000'
+		SET MESSAGE_TEXT = 'TYLKO 18+'
+	END IF;
+END;
+
+
+ZADANIE 1
+
+DELIMITER $$
+CREATE TRIGGER waga_kreatur
+BEFORE INSERT ON kreatura
+FOR EACH ROW 
+BEGIN
+	IF NEW.waga <= 0 THEN
+		SIGNAL SQLSTATE '45000'
+		SET MESSAGE_TEXT = 'CO TO ZA WAGA?';
+	END IF;
+END$$
+DELIMITER ;
+
+
+ZADANIE 2
+
+CREATE TABLE archiwum_wypraw(id_wyprawy int, nazwa varchar(30),
+data_rozpoczecia DATE,data_zakonczenia DATE,
+kierownik varchar(30), PRIMARY KEY(id_wyprawy));
+
+CREATE TRIGGER Arch
+BEFORE DELETE ON wyprawa
+FOR EACH ROW 
+BEGIN
+	IF OLD.
+		INSERT INTO archiwum_wypraw as OLD.     ;
+	END IF;
+END://
+
+ZADANIE 3
+
+DELIMITER;
+CREATE TRIGGER eliksir_sily
