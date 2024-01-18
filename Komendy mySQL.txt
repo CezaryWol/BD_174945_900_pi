@@ -2,8 +2,9 @@
 
 CREATE TABLE          - Tworzenie tabeli
 SELECT * FROM         - Wyświetlanie rekordów
-INSERT INTO__VALUES   - Wstawianie rekordów do tabeli
-AlTER TABLE           - Edytowanie struktóry tabeli
+INSERT INTO_()VALUES()- Wstawianie rekordów do tabeli
+ALTER TABLE           - Edytowanie struktóry tabeli
+   ALTER nazw.kol SET - ADD column - DROP column - Modify column - ADD CONSTRAINT
 UPDATE SET            - Edytowanie znanych już rekordów(komórek)
 DELETE FROM (warunek) - Usuwa rekordy na stałe, spełniające warunek
 DROP                  - Usuwa stróktóry typu klucze obce oraz całe tabele
@@ -17,6 +18,10 @@ FOREIGN KEY(_t1_kolumna_) REFERENCES _tabela2_(_t2_kolumna_)
 
       * Powiązanie kolumny z kolumną innej tabeli  *
 
+FOREIGN KEY(_t1_kolumna_) REFERENCES _tabela2_(_t2_kolumna_) on delete cascade
+
+      * W wypadku usuwania kaskadowego lub innych po usunięciu *
+
 ### KOMENDY DO SELECTA ###
 
 # PISANE NA POCZĄTKU
@@ -29,16 +34,18 @@ GROUP COUNT
 # PISANE NA KOŃCU
 
 GROUP BY(_kolumna_)      - Łączy rekordy o takich samych danych w kolumnie
-ORDER BY _CZYM_
-LIMIT _CYFRA_
+ORDER BY _CZYM_          - Segregowanie
+     ASC - od A do Z      
+     DESC - od Z do A
+LIMIT _CYFRA_            - Limit wyświetlanych wyników
 
 ### KOMENDY WARUNKOWE ###
 
-CASE
-WHERE
-IF
-IFNULL
-NULLIF
+CASE                 - warunek
+WHERE                - gdy, kiedy
+IF                   - jeśli
+IFNULL               - jeśli puste
+NULLIF               - ???
 
 ### KOMENDY DO TWORZENIA WARUNKÓW ###
 
@@ -46,21 +53,27 @@ ELSE  -  OR  -  AND  - w przeciwnym razie, lub, i
 BETWEEN _ AND _      - Pomiędzy liczbami
 _ IS NOT NULL        - Komórka nie jest pusta
 _ LIKE '%LITERY%'    - Sprawdza czy dane LITERY znajdują się w danych komórkach
-NOT IN
+NOT IN               - Nie ma w
 
 ### DODATKOWE KOMENDY ###
 
-INT()
-VARCHAR()
-FLOAT()
-DATE
-SUM(_kolumna_)
-AVG(_kolumna_)
-DATEDIFF
-YEAR(_data_) 
-MONTH(_data_)
-DAY(_data_)
-MIN(_kolumna_)
-MAX(_kolumna_)
+INT()                - Liczba całkowita
+VARCHAR()            - Łańcuch znaków
+FLOAT()              - Zmiennoprzecinkowa
+DATE                 - Data
+LONGTEXT             - Długie teksty
+ENUM("?","?")        - wyliczeniowy
+INT unsigned         - Nie ujemna całkowita
+default 2000         - standardowa/standardowa 2000
+NOT NULL             - Nie może być pusta
+
+SUM(_kolumna_)       - Suma
+AVG(_kolumna_)       - Średnia
+DATEDIFF             - Różnica w datach
+YEAR(_data_)         - Rok wbyrany z całej daty
+MONTH(_data_)        - Miesiąc wybrany z całej daty
+DAY(_data_)          - dzień wybrany z całej daty
+MIN(_kolumna_)       - wartosc minimalna w kolumnie
+MAX(_kolumna_)       - wartosc maksymalna w kolumnie
 
 
